@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Calculation</title>
+</head>
+
+<body>
+    
+    <center><h1>MATRIX CALCULATION</h1></center>
+    <div style="margin-left: 20px;">
+    Number of matrices (either 1 or 2): <input type="number" id="matrices" min="1" max="2" style="width: 100px;">
+    <br> <span onclick="inputMatrix()">SUBMIT</span>
+    <br>
+    <div id="1matrix" style="visibility: hidden;">
+        Enter number of rows for the matrix: <input type="number" id="rows" min="2" max="5">
+        <br> Enter number of coloumns for the matrix: <input type="number" id="coloumns" min="2" max="5">
+        <br> <span onclick="rowsColsInput()">SUBMIT</span>
+    </div>
+
+    <div id="2matrix" style="visibility: hidden;">
+        <br> Enter number of rows for the 1st matrix: <input type="number" id="rows1" min="2" max="5">
+        <br> Enter number of coloumns for the 1st matrix: <input type="number" id="coloumns1" min="2" max="5">
+        <br> Enter number of rows for the 2nd matrix: <input type="number" id="rows2" min="2" max="5">
+        <br> Enter number of coloumns for the 2nd matrix: <input type="number" id="coloumns2" min="2" max="5">
+        <br> <span onclick="rowsColsInput()">SUBMIT</span>
+
+        <!-- <select name="operations" id=""> Select Your Operation:
+            <option value="">Determinant of this matrix</option>
+            <option value="">Transpose of the matrix</option>
+            <option value="">The inverse of the matrix</option>
+            <option value="">Add a scalar to matrix</option>
+            <option value="">Multiply the matrix with a scalar</option>
+            
+        </select> -->
+        <br> <br>
+    </div>
+
+    <div id="rowsCols">
+
+    </div>
+
+</div>
+
+
+
+
+
+    <script>
+
+        function inputMatrix() {
+
+            var a = document.getElementById("matrices").value;
+            if (a == 1) {
+
+                document.getElementById("1matrix").style.visibility = "visible";
+                document.getElementById("2matrix").style.visibility = "hidden";
+
+
+
+            }
+
+
+            else if (a == 2) {
+                document.getElementById("1matrix").style.visibility = "hidden";
+                document.getElementById("2matrix").style.visibility = "visible";
+
+
+            }
+            else {
+                alert("Wrong Input")
+            }
+        }
+
+        function rowsColsInput() {
+            var c = document.getElementById("matrices").value;
+            if (c == 1) {
+
+                var arr = []
+
+                var rows = document.getElementById("rows").value;
+                var coloumns = document.getElementById("coloumns").value;
+                document.getElementById("rowsCols").innerHTML = " ";
+
+
+                for (var i = 1; i <= rows; i++) {
+                    for (var j = 1; j <= coloumns; j++) {
+
+                        document.getElementById("rowsCols").innerHTML += "<input type='number' id = '" + i + "_" + j + "' style='width: 50px; height: 25px; margin-left: 5px; margin-top: 5px'/>"
+                        // var d = document.getElementById(i + "_" + j).value;
+                        // arr.push(d);
+                        // console.log(arr);
+                    }
+                    document.getElementById("rowsCols").innerHTML += "<br>";
+
+                }
+
+                document.getElementById("rowsCols").innerHTML += "<h4 > Select Your Operation: </h4> <select name='operations' id='operators'> <option value=''> --Select Operation-- </option> <option value='det'>Determinant of this matrix </option> <option value='trans'>Transpose of the matrix</option> <option value='inv'>The inverse of the matrix</option> <option value='scal'>Add a scalar to matrix</option> <option value='mul'>Multiply the matrix with a scalar</option> </select>";
+                document.getElementById("rowsCols").innerHTML += "<Span id='calculate' style='margin-left: 20px;' onclick='calculate()'> CALCULATE </Span>";
+
+            }
+            else if (c == 2) {
+                var rows1 = document.getElementById("rows1").value;
+                var coloumns1 = document.getElementById("coloumns1").value;
+                var rows2 = document.getElementById("rows2").value;
+                var coloumns2 = document.getElementById("coloumns2").value;
+                document.getElementById("rowsCols").innerHTML = " ";
+                document.getElementById("rowsCols").innerHTML += "<h3> First Matrix: </h3>";
+
+                for (var k = 1; k <= rows1; k++) {
+                    for (var l = 1; l <= coloumns1; l++) {
+                        document.getElementById("rowsCols").innerHTML += "<input type='number' id = '" + k + "_" + l + "' style='width: 50px; height: 25px; margin-left: 5px; margin-top: 5px;'/>"
+                    }
+                    document.getElementById("rowsCols").innerHTML += "<br>";
+                }
+                document.getElementById("rowsCols").innerHTML += "<br><br>";
+
+                document.getElementById("rowsCols").innerHTML += "<h4 > Select Your Operation: </h4> <select name='operations1' id='operators1'> <option value=''> --Select Operation-- </option> <option value='multiply1'>Multiply the first matrix with the second. </option> <option value='multiply2'>Multiply the second matrix with first.</option> <option value='add'>Add both matrices</option> <option value='sub1'>Subtract the first matrix from second</option> <option value='sub2'>Subtract the second matrix from the first</option> </select>";
+
+                document.getElementById("rowsCols").innerHTML += "<br><br>";
+                document.getElementById("rowsCols").innerHTML += "<h3> Second Matrix: </h3>";
+
+                for (var m = 1; m <= rows2; m++) {
+                    for (var n = 1; n <= coloumns2; n++) {
+                        document.getElementById("rowsCols").innerHTML += "<input type='number' id = '" + m + "_" + n + "' style='width: 50px; height: 25px; margin-left: 5px; margin-top: 5px; '/>"
+                    }
+                    document.getElementById("rowsCols").innerHTML += "<br>";
+                }
+                document.getElementById("rowsCols").innerHTML += "<br><br>";
+
+            document.getElementById("rowsCols").innerHTML += "<Span id='calculate1' style='margin-left: 20px;' onclick='calculate()'> CALCULATE </Span>";
+
+            }
+            
+
+
+        }
+    //     function calculate() {
+    //         var arr = []
+
+    //             var rows = document.getElementById("rows").value;
+    //             var coloumns = document.getElementById("coloumns").value;
+    //             document.getElementById("rowsCols").innerHTML = " ";
+
+
+    //             for (var i = 1; i <= rows; i++) {
+    //                 for (var j = 1; j <= coloumns; j++) {
+
+    //                    // document.getElementById("rowsCols").innerHTML += "<input type='number' id = '" + i + "_" + j + "' style='width: 50px; height: 25px; margin-left: 5px; margin-top: 5px'/>"
+    //                     var d = document.getElementById(i + "_" + j).value;
+    //                     arr.push(d);
+    //                     console.log(arr);
+    //                 }
+    //     }
+
+
+    // }
+
+    </script>
+
+</body>
+
+</html>
